@@ -149,14 +149,14 @@ We can also do calculations with the values in a query.
 For example, if we wanted to look at the mass of each individual
 on different dates, but we needed it in kg instead of g we would use
 
-    SELECT year, month, day, weight/1000.0 from surveys
+    SELECT year, month, day, weight/1000.0 from surveys;
 
 When we run the query, the expression `weight / 1000.0` is evaluated for each row
 and appended to that row, in a new column.  Expressions can use any fields, any
 arithmetic operators (+ - * /) and a variety of built-in functions (). For
 example, we could round the values to make them easier to read.
 
-    SELECT plot, species_id, sex, weight, ROUND(weight / 1000.0, 2) FROM surveys;
+    SELECT plot, species, sex, weight, ROUND(weight / 1000.0, 2) FROM surveys;
 
 ***EXERCISE: Write a query that returns
              The year, month, day, speciesID and weight in mg***
@@ -256,7 +256,7 @@ Another note for ordering. We don’t actually have to display a column to sort 
 it.  For example, let’s say we want to order by the species ID, but we only want
 to see genus and species.
 
-    SELECT genus, species FROM species ORDER BY taxon ASC;
+    SELECT genus, species FROM species ORDER BY taxa ASC;
 
 We can do this because sorting occurs earlier in the computational pipeline than
 field selection.
@@ -292,16 +292,16 @@ calculating combined values in groups.
 Let’s go to the surveys table and find out how many individuals there are.
 Using the wildcard simply counts the number of records (rows)
 
-    SELECT COUNT(*) FROM surveys
+    SELECT COUNT(*) FROM surveys;
 
 We can also find out how much all of those individuals weigh.
 
-    SELECT COUNT(*), SUM(weight) FROM surveys
+    SELECT COUNT(*), SUM(weight) FROM surveys;
 
 ***Do you think you could output this value in kilograms, rounded to 3 decimal
    places?***
 
-    SELECT ROUND(SUM(weight)/1000.0, 3) FROM surveys
+    SELECT ROUND(SUM(weight)/1000.0, 3) FROM surveys;
 
 There are many other aggregate functions included in SQL including
 MAX, MIN, and AVG.
@@ -314,7 +314,7 @@ using a GROUP BY clause
 
     SELECT species_id, COUNT(*)
     FROM surveys
-    GROUP BY species_id
+    GROUP BY species_id;
 
 GROUP BY tells SQL what field or fields we want to use to aggregate the data.
 If we want to group by multiple fields, we give GROUP BY a comma separated list.
@@ -329,7 +329,7 @@ captured, ordered by the count
     SELECT species_id, COUNT(*)
     FROM surveys
     GROUP BY species_id
-    ORDER BY COUNT(species_id)
+    ORDER BY COUNT(species_id);
 
 
 Joins
@@ -344,7 +344,7 @@ species codes.
 
     SELECT *
     FROM surveys
-    JOIN species ON surveys.species_id = species.species_id
+    JOIN species ON surveys.species_id = species.species_id;
 
 ON is like WHERE, it filters things out according to a test condition.  We use
 the table.colname format to tell the manager what column in which table we are
@@ -359,7 +359,7 @@ actual species names.
 
     SELECT surveys.year, surveys.month, surveys.day, species.genus, species.species
     FROM surveys
-    JOIN species ON surveys.species_id = species.species_id
+    JOIN species ON surveys.species_id = species.species_id;
 
 ***Exercise: Write a query that returns the genus, the species, and the weight
    of every individual captured at the site***
@@ -372,7 +372,7 @@ could do something like
     FROM surveys
     JOIN plots
     ON surveys.plot = plots.plot_id
-    GROUP BY plots.plot_type
+    GROUP BY plots.plot_type;
 
 
 Adding data to existing tables
