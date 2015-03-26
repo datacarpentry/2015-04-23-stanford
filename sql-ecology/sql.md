@@ -19,8 +19,13 @@ Relational databases
 
 * Relational databases store data in tables with fields (columns) and records
   (rows)
-* Data in tables has types, just like in Python, and all values in a field have
+* The data is not in any particular order
+* Data in tables has types and all values in a field have
   the same type ([list of data types](#datatypes))
+* Every row-column combination contains a single *atomic* value, i.e., not
+   containing parts we might want to work with separately.
+* Information is not redundant.
+* Data is split into multiple tables, each containing one class of information. Tables are related by shared columns of information.
 * Queries let us look up data or make calculations based on columns
 
 
@@ -152,7 +157,9 @@ on different dates, but we needed it in kg instead of g we would use
     SELECT year, month, day, weight/1000.0 from surveys;
 
 When we run the query, the expression `weight / 1000.0` is evaluated for each row
-and appended to that row, in a new column.  Expressions can use any fields, any
+and appended to that row, in a new column. Note that because weight is an integer, if we divide by the integer 1000, the results will be reported as integers. In order to get more significant digits, you need to include the decimal point so that SQL knows you want the results reported as floating point numbers. 
+
+Expressions can use any fields, any
 arithmetic operators (+ - * /) and a variety of built-in functions (). For
 example, we could round the values to make them easier to read.
 
