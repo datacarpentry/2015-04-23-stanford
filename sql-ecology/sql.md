@@ -163,7 +163,7 @@ Expressions can use any fields, any
 arithmetic operators (+ - * /) and a variety of built-in functions (). For
 example, we could round the values to make them easier to read.
 
-    SELECT plot, species, sex, weight, ROUND(weight / 1000.0, 2) FROM surveys;
+    SELECT plot, species_ID, sex, weight, ROUND(weight / 1000.0, 2) FROM surveys;
 
 ***EXERCISE: Write a query that returns
              The year, month, day, speciesID and weight in mg***
