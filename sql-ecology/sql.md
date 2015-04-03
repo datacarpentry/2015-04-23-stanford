@@ -134,7 +134,7 @@ been sampled we use ``DISTINCT``
 If we select more than one column, then the distinct pairs of values are
 returned
 
-    SELECT DISTINCT year, species_id FROM surveys;
+    SELECT DISTINCT year, species FROM surveys;
 
 ### Calculated values
 
@@ -142,7 +142,7 @@ We can also do calculations with the values in a query.
 For example, if we wanted to look at the mass of each individual
 on different dates, but we needed it in kg instead of g we would use
 
-    SELECT year, month, day, weight/1000.0 from surveys;
+    SELECT year, month, day, wgt/1000.0 from surveys;
 
 When we run the query, the expression `weight / 1000.0` is evaluated for each row
 and appended to that row, in a new column. Note that because weight is an integer, if we divide by the integer 1000, the results will be reported as integers. In order to get more significant digits, you need to include the decimal point so that SQL knows you want the results reported as floating point numbers. 
@@ -151,7 +151,7 @@ Expressions can use any fields, any
 arithmetic operators (+ - * /) and a variety of built-in functions (). For
 example, we could round the values to make them easier to read.
 
-    SELECT plot, species_ID, sex, weight, ROUND(weight / 1000.0, 2) FROM surveys;
+    SELECT plot, species, sex, wgt, ROUND(wgt / 1000.0, 2) FROM surveys;
 
 ***EXERCISE: Write a query that returns
              The year, month, day, speciesID and weight in mg***
@@ -164,7 +164,7 @@ criteria.  For example, let’s say we only want data for the species Dipodomys
 merriami, which has a species code of DM.  We need to add a WHERE clause to our
 query:
 
-    SELECT * FROM surveys WHERE species_id="DM";
+    SELECT * FROM surveys WHERE species="DM";
 
 We can do the same thing with numbers.
 Here, we only want the data since 2000:
@@ -175,7 +175,7 @@ We can use more sophisticated conditions by combining tests with AND and OR.
 For example, suppose we want the data on Dipodomys merriami starting in the year
 2000:
 
-    SELECT * FROM surveys WHERE (year >= 2000) AND (species_id = "DM");
+    SELECT * FROM surveys WHERE (year >= 2000) AND (species = "DM");
 
 Note that the parentheses aren’t needed, but again, they help with readability.
 They also ensure that the computer combines AND and OR in the way that we
@@ -184,7 +184,7 @@ intend.
 If we wanted to get data for any of the Dipodomys species,
 which have species codes DM, DO, and DS we could combine the tests using OR:
 
-    SELECT * FROM surveys WHERE (species_id = "DM") OR (species_id = "DO") OR (species_id = "DS");
+    SELECT * FROM surveys WHERE (species = "DM") OR (species = "DO") OR (species = "DS");
 
 ***EXERCISE: Write a query that returns
    the day, month, year, species ID, and weight (in kg) for
@@ -206,11 +206,11 @@ the year 2000 on.  This time, let’s use IN as one way to make the query easier
 to understand.  It is equivalent to saying `WHERE (species_id = "DM") OR (species_id
 = "DO") OR (species_id = "DS")`, but reads more neatly:
 
-    SELECT * FROM surveys WHERE (year >= 2000) AND (species_id IN ("DM", "DO", "DS"));
+    SELECT * FROM surveys WHERE (year >= 2000) AND (species IN ("DM", "DO", "DS"));
 
     SELECT *
     FROM surveys
-    WHERE (year >= 2000) AND (species_id IN ("DM", "DO", "DS"));
+    WHERE (year >= 2000) AND (species IN ("DM", "DO", "DS"));
 
 We started with something simple, then added more clauses one by one, testing
 their effects as we went along.  For complex queries, this is a good strategy,
@@ -291,12 +291,12 @@ Using the wildcard simply counts the number of records (rows)
 
 We can also find out how much all of those individuals weigh.
 
-    SELECT COUNT(*), SUM(weight) FROM surveys;
+    SELECT COUNT(*), SUM(wgt) FROM surveys;
 
 ***Do you think you could output this value in kilograms, rounded to 3 decimal
    places?***
 
-    SELECT ROUND(SUM(weight)/1000.0, 3) FROM surveys;
+    SELECT ROUND(SUM(wgt)/1000.0, 3) FROM surveys;
 
 There are many other aggregate functions included in SQL including
 MAX, MIN, and AVG.
@@ -307,9 +307,9 @@ MAX, MIN, and AVG.
 Now, let's see how many individuals were counted in each species. We do this
 using a GROUP BY clause
 
-    SELECT species_id, COUNT(*)
+    SELECT species, COUNT(*)
     FROM surveys
-    GROUP BY species_id;
+    GROUP BY species;
 
 GROUP BY tells SQL what field or fields we want to use to aggregate the data.
 If we want to group by multiple fields, we give GROUP BY a comma separated list.
@@ -321,10 +321,10 @@ We can order the results of our aggregation by a specific column, including the
 aggregated column.  Let’s count the number of individuals of each species
 captured, ordered by the count
 
-    SELECT species_id, COUNT(*)
+    SELECT species, COUNT(*)
     FROM surveys
-    GROUP BY species_id
-    ORDER BY COUNT(species_id);
+    GROUP BY species
+    ORDER BY COUNT(species);
 
 
 Joins
@@ -339,7 +339,7 @@ species codes.
 
     SELECT *
     FROM surveys
-    JOIN species ON surveys.species_id = species.species_id;
+    JOIN species ON surveys.species = species.species_id;
 
 ON is like WHERE, it filters things out according to a test condition.  We use
 the table.colname format to tell the manager what column in which table we are
@@ -354,7 +354,7 @@ actual species names.
 
     SELECT surveys.year, surveys.month, surveys.day, species.genus, species.species
     FROM surveys
-    JOIN species ON surveys.species_id = species.species_id;
+    JOIN species ON surveys.species = species.species_id;
 
 ***Exercise: Write a query that returns the genus, the species, and the weight
    of every individual captured at the site***
