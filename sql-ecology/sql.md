@@ -187,7 +187,7 @@ which have species codes DM, DO, and DS we could combine the tests using OR:
     SELECT * FROM surveys WHERE (species = "DM") OR (species = "DO") OR (species = "DS");
 
 ***EXERCISE: Write a query that returns
-   the day, month, year, species ID, and weight (in kg) for
+   the day, month, year, species, and weight (in kg) for
    individuals caught on Plot 1 that weigh more than 75 g***
 
 
