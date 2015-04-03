@@ -6,12 +6,13 @@ Setup
 
 1. Install Firefox
 2. Install the SQLite Manager add on: **Menu (the three horizontal lines near the
-top right corner of Firefox) -> Add-ons -> Search -> SQLite
+top right corner of Firefox) OR Tools -> Add-ons -> Search -> SQLite
 Manager -> Install -> Restart now**
 3. Download the [Portal Database](http://files.figshare.com/1919743/portal_mammals.sqlite)
-4. Add SQLite Manager to the menu: **Menu -> Customize, then drag the SQLite
+4. Add SQLite Manager to the menu: **Menu OR (View -> Toolbars) -> Customize, then drag the SQLite
    Manager icon to one of the empty menu squares on the right, Exit Customize**
-5. Open SQLite Manager: **Menu -> SQLite Manager**
+5. Open SQLite Manager: **Menu OR Tools -> SQLite Manager**
+6. To force SQLite to open in a Firefox tab instead of its own window (this allows you to use Firefox options like zoom), in the SQLite window: Tools -> Options -> Under "Start SQLite Manager" select "in a new tab"
 
 
 Relational databases
