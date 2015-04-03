@@ -73,21 +73,20 @@ Introduction to SQLite Manager
 ------------------------------
 
 Let's all open the database we downloaded in SQLite Manager by clicking on the
-open file icon.
+open file icon and choosing the portal_mammals.sqlite file.
 
 You can see the tables in the database by looking at the left hand side of the
 screen under Tables.
 
-To see the contents of a table, click on that table and then click on the Browse
-and search tab in the right hand section of the screen.
+To see the contents of a table, click on that table and then click on the Browse & Search tab in the right hand section of the screen.
 
 If we want to write a query, we click on the Execute SQL tab.
 
 Import
 ------
 
-1. Start a New Database **Database -> New Database**
-2. Start the import **Database -> Import**
+1. Start a New Database **Database -> New Database** and choose a location for it
+2. Start the import **Database -> Import** 
 3. Select the file to import
 4. Give the table a name (or use the default)
 5. If the first row has column headings, check the appropriate box
