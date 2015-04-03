@@ -21,7 +21,7 @@ Relational databases
 * Relational databases store data in tables with fields (columns) and records
   (rows)
 * The data is not in any particular order
-* Data in tables has types and all values in a field have
+* Data in tables have types and all values in a field have
   the same type ([list of data types](#datatypes))
 * Every row-column combination contains a single *atomic* value, i.e., not
    containing parts we might want to work with separately.
