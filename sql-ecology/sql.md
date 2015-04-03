@@ -15,8 +15,8 @@ Manager -> Install -> Restart now**
 6. To force SQLite to open in a Firefox tab instead of its own window (this allows you to use Firefox options like zoom), in the SQLite window: Tools -> Options -> Under "Start SQLite Manager" select "in a new tab"
 
 
-Relational databases
---------------------
+Relational databases & database design
+--------------------------------------
 
 * Relational databases store data in tables with fields (columns) and records
   (rows)
@@ -67,18 +67,6 @@ This is a real dataset that has been used in over 100 publications. We've
 simplified it just a little bit for the workshop, but you can download the
 [full dataset](http://esapubs.org/archive/ecol/E090/118/) and work with it using
 exactly the same tools we'll learn about today.
-
-
-Database Design
----------------
-
-1. Every row-column combination contains a single *atomic* value, i.e., not
-   containing parts we might want to work with separately.
-2. One field per type of information
-3. No redundant information
-     * Split into separate tables with one table per class of information
-	   * Needs an identifier in common between tables – shared column - to
-       reconnect (foreign key).
 
 
 Introduction to SQLite Manager
