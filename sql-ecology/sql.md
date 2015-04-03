@@ -166,6 +166,7 @@ query:
 
     SELECT * FROM surveys WHERE species="DM";
 
+Note that strings must be surrounded by quotes.
 We can do the same thing with numbers.
 Here, we only want the data since 2000:
 
