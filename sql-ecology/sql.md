@@ -179,8 +179,7 @@ For example, suppose we want the data on Dipodomys merriami starting in the year
     SELECT * FROM surveys WHERE (year >= 2000) AND (species = "DM");
 
 Note that the parentheses aren’t needed, but again, they help with readability.
-They also ensure that the computer combines AND and OR in the way that we
-intend.
+If there are no parentheses, then by default the computer will evaluate everything from left to right. By including the parentheses, we ensure that the computer combines AND and OR in the way that we intend. 
 
 If we wanted to get data for any of the Dipodomys species,
 which have species codes DM, DO, and DS we could combine the tests using OR:
