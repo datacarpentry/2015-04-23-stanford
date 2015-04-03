@@ -369,6 +369,11 @@ could do something like
     ON surveys.plot = plots.plot_id
     GROUP BY plots.plot_type;
 
+***Exercise: Write a query that returns the genus, species, plot type and average weights (rounded to two decimal places) for each species of individual captured, reported by species_ID and plot type and ordered from the lowest weight to the highest. Exclude all records that don't have weight values recorded.***
+
+In other words I want to look at each species for each different plot type and see what the average weights for those species are under each of those conditions. I don't care about instances where the weight is not reported. And want to see them ordered by weight in ascending order.
+
+
 
 Adding data to existing tables
 ------------------------------
