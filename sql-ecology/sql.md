@@ -154,7 +154,7 @@ example, we could round the values to make them easier to read.
     SELECT plot, species, sex, wgt, ROUND(wgt / 1000.0, 2) FROM surveys;
 
 ***EXERCISE: Write a query that returns
-             The year, month, day, speciesID and weight in mg***
+             The year, month, day, species and weight in mg***
 
 Filtering
 ---------
