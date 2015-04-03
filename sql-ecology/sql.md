@@ -248,7 +248,7 @@ Order of execution
 ------------------
 
 Another note for ordering. We don’t actually have to display a column to sort by
-it.  For example, let’s say we want to order by the species ID, but we only want
+it.  For example, let’s say we want to order by the species, but we only want
 to see genus and species.
 
     SELECT genus, species FROM species ORDER BY taxa ASC;
