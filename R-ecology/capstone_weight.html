@@ -1,0 +1,73 @@
+<html><head><title>capstone lesson</head></title>
+
+<body>
+
+<pre>
+
+# Research question
+
+# Hypothesis: In the DM species, the average weight of males
+# is higher than females
+
+# Load in the libraries that we'll need
+
+library(sqldf)
+library(ggplot2)
+
+# Read in our data from the online 
+# public database FigShare
+
+surveys <- read.csv("http://files.figshare.com/1919744/surveys.csv")
+
+# Look at the surveys data
+str(surveys)
+
+# Using SQL, create a data frame that 
+# just has the DM species 
+# and only keep the rows that 
+#   - have a value for weight
+#   - have 'M' or 'F' for sex
+
+
+surveys_DM <- sqldf("select * FROM surveys WHERE species_id='DM' AND weight IS NOT NULL AND (sex='M' OR sex='F')")
+
+str(surveys_DM)
+
+# fix the data frame to just have the M and F factors
+surveys_DM$sex <- factor(surveys_DM$sex)
+
+
+# Calculate the mean and sd weight for males and females
+
+sex_mean <- tapply(surveys_DM$weight, surveys_DM$sex, mean)
+sex_mean
+
+sex_sd <- tapply(surveys_DM$weight, surveys_DM$sex, sd)
+sex_sd
+
+# See if the weight of the Males and Females are 
+# significantly different from each other with a t-test
+# t.test is a built in R function
+
+t.test(surveys_DM$weight~surveys_DM$sex)
+
+# Make a bar plot of average weight and std dev
+# and color by sex
+
+# first make a data frame with the sex and average weight
+
+surveys_wgt_summary <- data.frame(sex=levels(surveys_DM$sex), mean=sex_mean, sd=sex_sd )
+
+surveys_wgt_summary
+
+# plot the mean with standard deviation error bars
+# modified from R-cookbook plots http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2)/
+
+ggplot(data=surveys_wgt_summary, aes(x=sex, y=mean, fill=sex)) + geom_bar(stat="identity") + geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), colour="black", width=.1, position=position_dodge(.9)) 
+
+</pre>
+
+</body>
+</html>
+
+
